@@ -1,63 +1,46 @@
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import './App.css';
+import { fetchWeatherAction } from "./redux/slices/weatherSlices";
 
 function App() {
+  const [city, setCity] = useState("");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchWeatherAction("Goa"));
+  }, []);
 
-
-  const apiKey = "82005d27a116c2880c8f0fcb866998a0"
-  const [inputCity, setInputCity] = useState("")
-  const [data, setData] = useState({})
-
-
-  const getWetherDetails = (cityName) => {
-    if (!cityName) return
-    const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey
-    axios.get(apiURL).then((res) => {
-      console.log("response", res.data)
-      setData(res.data)
-    }).catch((err) => {
-      console.log("err", err)
-    })
-  }
-
-  const handleChangeInput = (e) => {
-    console.log("value", e.target.value)
-    setInputCity(e.target.value)
-  }
-
-  const handleSearch = () => {
-    getWetherDetails(inputCity)
-  }
-
-
+  const state = useSelector((state) => state);
+  const { weather, loading, error } = state;
+  console.log(state);
   return (
-    <div className="col-md-12 text-center">
-      <div className="wetherBg">
-        <h1 className="heading">Weather App</h1>
-
-        <div className="d-grid gap-3 col-4 mt-4">
-          <input type="text" className="form-control"
-            value={inputCity}
-            onChange={handleChangeInput} />
-          <button className="btn btn-primary" type="button"
-            onClick={handleSearch}
-          >Search</button>
+    <div className="main1">
+      <div className="main">
+        <div className="relative">
+          <p className="mt">Weather</p>
+          <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Search City"
+            className="rounded"></input>
+          <button onClick={() => dispatch(fetchWeatherAction(city))} type="button" className="items">Search</button>
         </div>
-      </div>
+        {loading ? (
+          <h1 className="text">Please wait..</h1>
+        ) : error ? (
+          <h1 className="red">{error?.message}</h1>
+        ) : (
 
-      {Object.keys(data).length > 0 &&
-        <div className="col-md-12 mt-5">
-
-          <div className="shadow rounded wetherResultBox">
-            <h5 className="weathorCity">
-              {data?.name}
-            </h5>
-            <h6 className="weathorTemp">{((data?.main?.temp) - 273.15).toFixed(2)}°C</h6>
+          <div className="border">
+            <p className="center">{weather?.weather[0].main}, {" "} {Math.ceil(Number(weather?.main.temp))}{" "}
+              <span className="yellow">°F</span>
+            </p>
+            <p className="xl "> {weather?.name}, {weather?.sys?.country} </p>
+            <p className="mb">
+              City- {weather?.name},{" "} {weather?.sys?.country} <br />
+              Description- {" "}{weather?.weather[0].description} <br />
+              Temperature- {" "} {Math.ceil(Number(weather?.main.temp))}<br />
+              Humidity- {" "} {""}{weather?.main?.humidity} %
+            </p>
           </div>
-        </div>
-      }
-
+        )}
+      </div>
     </div>
   );
 }
