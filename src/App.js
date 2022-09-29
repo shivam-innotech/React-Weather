@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchWeatherAction } from "./redux/slices/weatherSlices";
+import { fetchWeatherAction } from "./redux/slices/service";
 
 function App() {
   const [city, setCity] = useState("");
@@ -26,7 +26,6 @@ function App() {
         ) : error ? (
           <h1 className="red">{error?.message}</h1>
         ) : (
-
           <div className="border">
             <p className="center">{weather?.weather[0].main}, {" "} {Math.ceil(Number(weather?.main.temp))}{" "}
               <span className="yellow">°F</span>
