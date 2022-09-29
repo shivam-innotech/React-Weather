@@ -1,4 +1,6 @@
 body {
+  background-color: rgb(97, 34, 255);
+  color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,3 +13,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.main{
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 20px; 
+  position: absolute;
+  left: 40%;
+  top: 80px;
+  padding: 30px 20px 20px 20px;
+  text-align: center;
+  background-color: rgb(113, 59, 255);
+}
+
+button{
+  color: white;
+  background-color: rgb(246, 82, 100);
+  border-style: solid;
+  border-color: white;
+  border-width: 0px;
+  height: 35px;
+  width: 70px;
+  border-radius: 0px 5px 5px 0px;
+}
+input{
+  border-radius: 5px 0px 0px 5px;
+  color: black;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  height: 31px;
+  width: 200px;
+}
+button:hover{
+  background-color: rgba(246, 82, 101, 0.707);
+}
+.mb{
+  background-color: rgba(45, 50, 90, 0.529);
+  padding: 15px;
+  margin-top: 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 22px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+}
+.mt{
+  margin-top: 30px;
+  line-height: 0px;
+  font-size: 50px;
+}
+.center{
+  font-size: 25px;
+}
+.xl{
+  line-height: 0px;
+  font-size: 25px;
+}
+
